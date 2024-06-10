@@ -83,3 +83,11 @@ func Unlock(ctx context.Context) {
 		atomic.AddInt32(&sTrace.IsLock, -1)
 	}
 }
+
+func IsLock(ctx context.Context) bool {
+	sTrace, ok := ctx.Value(Key).(*StackTrace)
+	if ok && sTrace.IsLock == 1 {
+		return true
+	}
+	return false
+}
